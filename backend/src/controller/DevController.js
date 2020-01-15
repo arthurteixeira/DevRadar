@@ -1,7 +1,15 @@
 const axios = require('axios');
 const Dev = require('../models/dev');
+const parseStringAsArray = require('../utils/parseStringAsArray');
+
+//index, show, store, update, destroy
 
 module.exports = {
+    async index(request, response){
+        const devs = await Dev.find();
+        return response.json(devs);
+    },
+
     async store(request, response) {
         const { github_username, techs, latitude, longitude } = request.body; //pegando requisicoes das rotas
 
@@ -9,7 +17,7 @@ module.exports = {
         if(!dev){
             const apiResponse = await axios.get(`https://api.github.com/users/${github_username}`); //api github 
             const { name = login, avatar_url, bio } = apiResponse.data; //pegando da api
-            const techsArray = techs.split(',').map(tech => tech.trim()); //fazendo parser das tecnologias     
+            const techsArray = parseStringAsArray(techs); //fazendo parser das tecnologias     
 
             const location = { //tipo de cordenada
                 type: 'Point',
