@@ -1,10 +1,29 @@
 const { Router } = require('express');
+const axios = require('axios');
+const Dev = require('./models/dev');
+
 const routes = Router();
 
-routes.post('/devs', (request, response) => {
-    console.log(request.body);
-    return response.json({ message: 'Hello World!'});
+
+routes.post('/devs', async (request, response) => {
+    const { github_username, techs } = request.body;
+    const apiResponse = await axios.get(`https://api.github.com/users/${github_username}`);
+
+    const { name = login, avatar_url, bio } = apiResponse.data;
+    const techsArray = techs.split(',').map(tech => tech.trim());
+    
+    const dev = await Dev.create({
+        github_username,
+        name,
+        avatar_url,
+        bio,
+        techs: techsArray
+    });
+
+    return response.json(dev);
 });
+
+module.exports = routes;
 
 //Métodos HTTP -> get, post, put, delete
 
@@ -16,5 +35,3 @@ routes.post('/devs', (request, response) => {
     POST Body: request.body (Dados p/ criação ou alteração de um registro)
 
 */
-
-module.exports = routes;
