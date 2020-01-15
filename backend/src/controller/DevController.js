@@ -35,5 +35,33 @@ module.exports = {
         }       
     
         return response.json(dev);
+    },
+
+    //update
+
+    async update(request, response){
+        const { github_username, techs, bio } = request.body;
+        const techsArray = parseStringAsArray(techs); //fazendo parser das tecnologias  
+                                    //usando user como pk  -- setando new values      
+        await Dev.findOneAndUpdate({github_username}, {$set: { techs: techsArray, bio }}, {new: true}, (err, doc) => {
+            if (err) {
+                console.error(err);
+            }
+            console.log(doc)});     
+        const devs = await Dev.find();
+        return response.json(devs);
+    },
+
+    async destroy(request, response){
+        const { github_username } = request.params;
+       
+        Dev.findOneAndRemove({ field: github_username }, (err, doc) => {
+            if (err) {
+                console.error(err);
+            }
+            console.log(doc)});
+        
+        const devs = await Dev.find();
+        return response.json(devs);
     }
 };
