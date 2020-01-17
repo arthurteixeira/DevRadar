@@ -1,0 +1,16 @@
+main{
+    flex: 1; /*td tela*/
+}
+
+main ul{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /*número de colunas*/
+    gap: 20px;
+    list-style: none; /*tirar bolinhas*/
+}
+
+@media (max-width: 650px) {
+    main ul {
+        grid-template-columns: 1fr;
+    }
+}
