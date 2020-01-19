@@ -11,7 +11,7 @@ module.exports = {
     },
 
     async store(request, response) {
-        const { github_username, techs, latitude, longitude } = request.body; //pegando requisicoes das rotas
+        const { github_username, techs, longitude, latitude } = request.body; //pegando requisicoes das rotas
 
         let dev = await Dev.findOne({ github_username }); //procurando no banco se ja tem obj com esse username
         if(!dev){

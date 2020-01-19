@@ -5,22 +5,18 @@ module.exports = {
     async index(request, response){ //buscar devs raio 10km, filtar por tecnologia
         const { latitude, longitude, techs } = request.query;
         const techsArray = parseStringAsArray(techs);
-        
         const devs = await Dev.find({
-            techs: {
-                $in: techsArray, // $in operador do mongo, comparando tech da query com os do banco
-            },
-            location: { //filtrando por localização
+            techs: { $in: techsArray },
+            location: {
                 $near: {
                     $geometry: {
                         type: 'Point',
-                        coordinates: [longitude, latitude],
+                        coordinates: [longitude, latitude]
                     },
-                    $maxDistancy: 10000, //meters, 10km
-                },
-            },
+                    $maxDistance: 10000
+                }
+            }
         });
-
-        return response.json(devs);
+        return response.json({ devs });
     }
 }

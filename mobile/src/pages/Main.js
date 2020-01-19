@@ -9,6 +9,7 @@ import api from '../services/api';
 function Main({ navigation }) { // navigation vem de routes, saber outras telas
     const [devs, setDevs] = useState([]);
     const [currentRegion, setCurrentRegion] = useState(null);
+    const [techs, setTechs] = useState('');
 
     useEffect(() => {
         async function loadInitialPosition() {
@@ -32,13 +33,15 @@ function Main({ navigation }) { // navigation vem de routes, saber outras telas
     }, []);
 
     async function loadDevs() {
-        console.log('laguadnasdudoasjkdoisjads')
         const { latitude, longitude } = currentRegion;
-        console.log('2')
-        const response = await api.get('/devs');
-        console.log('3')
-        setDevs(response.data);
-        console.log('4')
+        const response = await api.get('/search', {
+            params: {
+                latitude,
+                longitude,
+                techs
+            }
+        });
+        setDevs(response.data.devs);
     }
 
     function handleRegionChanged(region) {
@@ -60,9 +63,10 @@ function Main({ navigation }) { // navigation vem de routes, saber outras telas
                     <Marker
                         key={dev._id} 
                         coordinate={{
-                            latitude: dev.location.coordinates[1],
                             longitude: dev.location.coordinates[0],
-                        }}>
+                            latitude: dev.location.coordinates[1],
+                        }}
+                    >
                         <Image
                             style={styles.avatar}
                             source={{ uri: dev.avatar_url }}
@@ -86,6 +90,8 @@ function Main({ navigation }) { // navigation vem de routes, saber outras telas
                     placeholderTextColor="#999"
                     autoCapitalize="words" //primeira letra de palavra em caixa alta
                     autoCorrect={false} //n tentar corrigir o texto
+                    value={techs}
+                    onChangeText={setTechs}
                 />
                 <TouchableOpacity onPress={loadDevs} style={styles.loadButton}>
                     <MaterialIcons name="my-location" size={20} color="#FFF" />
