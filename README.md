@@ -17,13 +17,26 @@
 ## 🚀 Getting started
 
 ### Backend
+
 ```
  cd backend
  yarn install
+```
+
+Configurar URL de conexão do MongoDB, coloque sua URL no arquivo .env.
+
+```
+MONGO_URI=mongodb://username:password@host:port/database
+```
+
+Rodar servidor
+
+```
  yarn dev
 ```
 
 ### Web
+
 ```
  cd web
  yarn install
@@ -31,12 +44,13 @@
 ```
 
 ### Mobile
+
 ```
  cd mobile
  yarn install
  expo start
 ```
 
-
 ## 📝 Licença
+
 Esse projeto é licenciado pela [MIT License](https://opensource.org/licenses/MIT).
