@@ -14,6 +14,19 @@
   Desenvolvido durante a Semana Omnistack 10, o DevRadar é um projeto que busca por desenvolvedores na sua região. Na aplicação mobile é utilizado o Google Maps para obter a localização e encontrar os devs no raio de 100km, assim como procurar por tecnologias específicas. Na aplicação web é utilizada a API do GitHub para o cadastro dos desenvolvedores.
 </p>
 
+## 💻 Tecnologias
+
+- [Node.js](https://nodejs.org/en/)
+- [ReactJS](https://pt-br.reactjs.org/)
+- [Expo](https://docs.expo.io/versions/latest/)
+- [MongoDB](https://www.mongodb.com/)
+- [Yarn](https://yarnpkg.com/)
+- [Express](https://yarnpkg.com/en/package/express)
+- [Socket.io](https://yarnpkg.com/en/package/socket.io)
+- [Mongoose](https://yarnpkg.com/en/package/mongoose)
+- [Axios](https://yarnpkg.com/en/package/axios)
+- [Cors](https://yarnpkg.com/en/package/cors)
+
 ## 🚀 Getting started
 
 ### Backend
