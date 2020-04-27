@@ -25,16 +25,16 @@
 
 ### Web
 ```
- cd backend
+ cd web
  yarn install
- yarn dev
+ yarn start
 ```
 
 ### Mobile
 ```
- cd backend
+ cd mobile
  yarn install
- yarn dev
+ expo start
 ```
 
 
