@@ -23,7 +23,7 @@
  yarn install
 ```
 
-Configurar URL de conexão do MongoDB, coloque sua URL no arquivo .env.
+Configurar URL de conexão do MongoDB, coloque sua URL no arquivo .env.example e transforme em arquivo .env
 
 ```
 MONGO_URI=mongodb://username:password@host:port/database
